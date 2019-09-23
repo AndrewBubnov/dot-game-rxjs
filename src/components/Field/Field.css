@@ -1,0 +1,22 @@
+.field{
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 700px;
+}
+.score{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    color: #808080;
+    margin: 20px auto;
+}
+.success{
+    font-weight: 500;
+    color: #008000
+}
+.danger{
+    font-weight: 500;
+    color: #ff0000
+}
