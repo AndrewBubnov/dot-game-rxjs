@@ -1,5 +1,5 @@
 import React from 'react'
-import { setModalClosed } from "../../actions/actionCreators";
+import { setModalClosed } from "../../actions/actions";
 import * as PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'

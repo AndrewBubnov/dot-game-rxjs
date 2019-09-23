@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 import { StateContext } from "../../context/StateProvider";
-import {getLeaderBoard} from '../../actions/actionCreators'
+import { getLeaderBoard } from '../../actions/actions'
 import * as PropTypes from 'prop-types';
 import Modal from "../Modal/Modal";
 import './LeaderBoard.css'

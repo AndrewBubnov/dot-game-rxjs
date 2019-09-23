@@ -2,6 +2,7 @@ import { BehaviorSubject } from 'rxjs'
 import {scan, shareReplay} from 'rxjs/operators'
 
 import {
+    SET_STARTED,
     SET_PRESETS,
     SET_NEXT_GAME,
     SET_LEADER_BOARD,
@@ -13,9 +14,10 @@ import {
     SET_WINNER,
     SET_RANDOM_INDEX,
     SET_SLIDER_VALUES
-} from '../actions/actions'
+} from '../actions/types'
 
 export const initialState = {
+    started: false,
     presets: {},
     nextGame: false,
     leaderBoard: [],
@@ -39,6 +41,8 @@ export const initialState = {
 
 function rootReducer (state = initialState, {type, payload}) {
     switch (type){
+        case SET_STARTED:
+            return {...state, started: payload}
         case SET_PRESETS:
             return {...state, presets: payload}
         case SET_NEXT_GAME:

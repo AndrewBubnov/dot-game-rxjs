@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import StateProvider from "./context/StateProvider";
 import Field from "./components/Field/Field";
 import ControlUnit from "./components/ControlUnit/ControlUnit";
@@ -13,14 +13,15 @@ function App() {
     return (
         <div className="App">
             <SliderControlUnit/>
-            <div className='main-container'>
-                <ScoreBoard/>
+            {/*<div className='main-container'>*/}
+
                 <div className='field-container'>
+                    <ScoreBoard/>
                     <ControlUnit/>
                     <Field/>
                     <LeaderBoard/>
                 </div>
-            </div>
+            {/*</div>*/}
         </div>
     )
 }

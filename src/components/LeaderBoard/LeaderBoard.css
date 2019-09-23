@@ -1,6 +1,7 @@
 .leader-board{
     display: flex;
     flex-direction: column;
+    order: 4;
 }
 .leader-board-item{
     width: 300px;
@@ -12,4 +13,9 @@
 }
 .record{
     text-align: center;
+}
+@media screen and (max-width: 380px) {
+    .leader-board {
+        margin-top: 20px;
+    }
 }

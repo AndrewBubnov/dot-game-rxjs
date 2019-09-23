@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { StateContext } from "../../context/StateProvider";
-import {handleSliderChange} from '../../actions/actionCreators'
+import {handleSliderChange} from '../../actions/actions'
 import * as PropTypes from 'prop-types';
 import {controlStyles as useStyles, theme} from '../../styles/styles'
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
-
+const side = window.innerWidth <= 380 ? window.innerWidth *.95 : 700
 
 const SliderControlUnit = () => {
     const state = useContext(StateContext)
@@ -20,7 +20,7 @@ const SliderControlUnit = () => {
     }
 
     return (
-        <div style={{width: 700}}>
+        <div style={{width: side}}>
             <MuiThemeProvider theme={theme}>
                 <Typography gutterBottom className={classes.slider}>
                     Field size

@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import {initialState, store$} from '../../reducers/index'
-import {setStart, getPresetsFromServer, handleChange} from '../../actions/actionCreators'
+import React, { useEffect, useContext } from 'react'
+import { StateContext } from "../../context/StateProvider";
+import {setStart, getPresetsFromServer, handleChange} from '../../actions/actions'
 import * as PropTypes from 'prop-types';
 import {controlStyles as useStyles} from '../../styles/styles'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -12,13 +12,12 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './ControlUnit.css'
 
+const desktop = window.innerWidth > 380
 
 const ControlUnit = () => {
-    const [state, setState] = useState(initialState)
+    const state = useContext(StateContext)
     const { values, presets, started, nextGame } = state
-    useEffect(() => {
-        store$.subscribe(v => setState(v))
-    }, [])
+
     const classes = useStyles();
 
 
@@ -27,13 +26,13 @@ const ControlUnit = () => {
 
 
     useEffect(() => {
-        setLabelWidth(inputLabel.current.offsetWidth);
+        if (desktop) setLabelWidth(inputLabel.current.offsetWidth);
     }, []);
 
 
     useEffect(() => {
         getPresetsFromServer()
-    }, [getPresetsFromServer])
+    }, [])
 
     const presetsList = Object.entries(presets).map(item =>
         <MenuItem key={item[0]} value={item[1]}>{item[0].split('M')[0] + ' mode'}</MenuItem>)
@@ -52,6 +51,7 @@ const ControlUnit = () => {
                 variant="outlined"
                 autoComplete="off"
             />
+            {desktop &&
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel ref={inputLabel} htmlFor="presets">
                     Game mode
@@ -64,6 +64,7 @@ const ControlUnit = () => {
                     {presetsList}
                 </Select>
             </FormControl>
+            }
         </div>
     )
 }

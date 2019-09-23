@@ -9,6 +9,7 @@ export const theme = createMuiTheme({
     typography: {useNextVariants: true}
 })
 
+const margin = window.innerWidth <= 380 ? 1 : 7
 
 export const controlStyles = makeStyles(theme => ({
     root: {
@@ -18,7 +19,8 @@ export const controlStyles = makeStyles(theme => ({
     formControl: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        marginTop: theme.spacing(7),
+        marginTop: theme.spacing(margin),
+        marginBottom: theme.spacing(2),
         width: '100%',
         height: 50,
     },
@@ -28,12 +30,12 @@ export const controlStyles = makeStyles(theme => ({
     button: {
         marginLeft: theme.spacing(1),
         width: '100%',
-        height: 55,
+        height: 50,
     },
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        marginTop: theme.spacing(7),
+        marginTop: theme.spacing(margin),
         width: '100%',
         height: 50,
     },
