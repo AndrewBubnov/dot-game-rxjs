@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, { useContext } from 'react'
+import { StateContext } from "../../context/StateProvider";
 import ScoreItem from "./ScoreItem/ScoreItem";
 import * as PropTypes from "prop-types";
 import './ScoreBoard.css'
-import {initialState, store$} from "../../reducers";
+
 
 const ScoreBoard = () => {
-    const [state, setState] = useState(initialState)
+    const state = useContext(StateContext)
     const {score: {computer, user}, winner, name} = state
-    useEffect(() => {
-        store$.subscribe(v => setState(v))
-    }, [])
+
     const userName = name ? name : 'User'
     const scoreString = (
         <div style={{display: 'flex'}}>

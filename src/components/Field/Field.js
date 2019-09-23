@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import { StateContext } from "../../context/StateProvider";
 import { onUserClick, setResetGame } from '../../actions/actionCreators'
-import Cover from "../Cover/Cover";
 import * as PropTypes from 'prop-types';
 import Cell from "../Cell/Cell";
 import './Field.css'
-import {initialState, store$} from "../../reducers";
+
 
 
 
 
 
 const Field = () => {
-    const [state, setState] = useState(initialState)
+    const state = useContext(StateContext)
     const {values: {preset: {field}}, gameField} = state
-    useEffect(() => {
-        store$.subscribe(v => setState(v))
-    }, [])
-
-
 
     useEffect(() => {
         setResetGame()

@@ -1,9 +1,7 @@
-import {BehaviorSubject, Subject} from 'rxjs'
-import { observe } from "rxjs-observe";
-import {scan, startWith, shareReplay} from 'rxjs/operators'
+import { BehaviorSubject } from 'rxjs'
+import {scan, shareReplay} from 'rxjs/operators'
 
 import {
-    SET_STARTED,
     SET_PRESETS,
     SET_NEXT_GAME,
     SET_LEADER_BOARD,
@@ -18,7 +16,6 @@ import {
 } from '../actions/actions'
 
 export const initialState = {
-    started: false,
     presets: {},
     nextGame: false,
     leaderBoard: [],
@@ -42,8 +39,6 @@ export const initialState = {
 
 function rootReducer (state = initialState, {type, payload}) {
     switch (type){
-        case SET_STARTED:
-            return {...state, started: payload}
         case SET_PRESETS:
             return {...state, presets: payload}
         case SET_NEXT_GAME:
@@ -79,7 +74,6 @@ function rootReducer (state = initialState, {type, payload}) {
 
 
 let state = null
-
 
 function createStore(reducer) {
     const subj$ = new BehaviorSubject(initialState)

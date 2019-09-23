@@ -1,12 +1,8 @@
 import {
     SET_VALUES,
     SET_SLIDER_VALUES,
-    SET_STARTED,
     CALL_PRESETS,
-    CALL_LEADER_BOARD,
     CALL_USER_CLICK,
-    CALL_RESET_GAME,
-    CALL_MODAL_CLOSED,
     SET_RANDOM_INDEX,
     SET_GAME_FIELD,
     SET_SCORE,
@@ -19,7 +15,7 @@ import {
 import state, { store$ } from '../reducers/index'
 import axios from "axios";
 import { dateTime } from "../utils/utils";
-import {timeout} from "rxjs/operators";
+
 
 
 export const presetUrl = 'http://starnavi-frontend-test-task.herokuapp.com/game-settings'
@@ -42,7 +38,7 @@ export const setStart = () => {
 //**********************
 
 const setGameProcess = () => {
-    const {score, gameField, randomIndex, started, values: {preset: {field, delay: del}}} = getState()
+    const {score, gameField, randomIndex, values: {preset: {field, delay: del}}} = getState()
     const {computer, user} = score
     const size = field * field
     if (computer <= size / 2 && user <= size / 2) {
@@ -89,9 +85,6 @@ const setWinner = () => {
         store$.dispatch ({type: SET_MODAL_OPEN, payload: true})
         store$.dispatch ({type: SET_ERROR_MESSAGE, payload: serverSaveError})
     }
-    // finally {
-    //     store$.dispatch ({type: SET_STARTED, payload: false})
-    // }
 }
 //**********************
 
@@ -99,13 +92,25 @@ const setWinner = () => {
 export const getPresetsFromServer =  () => store$.dispatch({type: CALL_PRESETS})
 //**********************
 
-export const getLeaderBoard = () => store$.dispatch({type: CALL_LEADER_BOARD})
+export const getLeaderBoard = async() => {
+    try {
+        const response = await axios.get(winnerUrl)
+        if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
+        store$.dispatch ({type: SET_LEADER_BOARD, payload: response.data})
+    } catch (err) {
+        store$.dispatch ({type: SET_MODAL_OPEN, payload: true})
+        store$.dispatch ({type: SET_ERROR_MESSAGE, payload: leaderBoardError})
+    }
+}
 //**********************
 
 export const onUserClick = (e) => store$.dispatch({type: CALL_USER_CLICK, payload: {e}})
 //**********************
 
-export const setModalClosed = () => store$.dispatch({type: CALL_MODAL_CLOSED})
+export const setModalClosed = () => {
+    store$.dispatch ({type: SET_MODAL_OPEN, payload: false})
+    store$.dispatch ({type: SET_ERROR_MESSAGE, payload: ''})
+}
 //**********************
 
 export const setResetGame = () => {

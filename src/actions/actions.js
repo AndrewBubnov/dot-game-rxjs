@@ -1,4 +1,3 @@
-export const SET_STARTED = 'SET_STARTED'
 export const SET_PRESETS = 'SET_PRESETS'
 export const SET_NEXT_GAME = 'SET_NEXT_GAME'
 export const SET_LEADER_BOARD = 'SET_LEADER_BOARD'

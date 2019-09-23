@@ -59,16 +59,16 @@ function* getPresets() {
 }
 
 
-function* getLeaderBoard() {
-    try {
-        const response = yield call (() => axios.get(winnerUrl))
-        if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
-        yield put ({type: SET_LEADER_BOARD, payload: response.data})
-    } catch (err) {
-        yield put ({type: SET_MODAL_OPEN, payload: true})
-        yield put ({type: SET_ERROR_MESSAGE, payload: leaderBoardError})
-    }
-}
+// function* getLeaderBoard() {
+//     try {
+//         const response = yield call (() => axios.get(winnerUrl))
+//         if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
+//         yield put ({type: SET_LEADER_BOARD, payload: response.data})
+//     } catch (err) {
+//         yield put ({type: SET_MODAL_OPEN, payload: true})
+//         yield put ({type: SET_ERROR_MESSAGE, payload: leaderBoardError})
+//     }
+// }
 
 // function* setWinner() {
 //     const score = yield select (state => state.score)
@@ -138,10 +138,10 @@ function* setInitialField () {
 }
 
 
-function* setModalClosed() {
-    yield put ({type: SET_MODAL_OPEN, payload: false})
-    yield put ({type: SET_ERROR_MESSAGE, payload: ''})
-}
+// function* setModalClosed() {
+//     yield put ({type: SET_MODAL_OPEN, payload: false})
+//     yield put ({type: SET_ERROR_MESSAGE, payload: ''})
+// }
 
 function* callProcess(params) {
     if (params.payload) {
