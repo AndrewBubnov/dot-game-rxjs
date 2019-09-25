@@ -8,20 +8,16 @@ import SliderControlUnit from "./components/SliderControlUnit/SliderControlUnit"
 import './App.css';
 
 
-
 function App() {
     return (
         <div className="App">
             <SliderControlUnit/>
-            {/*<div className='main-container'>*/}
-
-                <div className='field-container'>
-                    <ScoreBoard/>
-                    <ControlUnit/>
-                    <Field/>
-                    <LeaderBoard/>
-                </div>
-            {/*</div>*/}
+            <div className='field-container'>
+                <ScoreBoard/>
+                <ControlUnit/>
+                <Field/>
+                <LeaderBoard/>
+            </div>
         </div>
     )
 }
@@ -29,6 +25,6 @@ function App() {
 
 export default () => (
     <StateProvider>
-    <App/>
+        <App/>
     </StateProvider>
 )

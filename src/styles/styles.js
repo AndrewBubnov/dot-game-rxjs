@@ -17,7 +17,6 @@ export const controlStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
     },
     formControl: {
-        marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(margin),
         marginBottom: theme.spacing(2),
@@ -28,12 +27,10 @@ export const controlStyles = makeStyles(theme => ({
         margin: theme.spacing(2),
     },
     button: {
-        marginLeft: theme.spacing(1),
         width: '100%',
         height: 50,
     },
     textField: {
-        marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(margin),
         width: '100%',

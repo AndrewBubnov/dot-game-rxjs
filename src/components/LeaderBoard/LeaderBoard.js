@@ -11,7 +11,7 @@ const LeaderBoard = () => {
         getLeaderBoard()
     }, [])
 
-    const leaderList = leaderBoard.map(item => <div key={item.id} className='leader-board-item'>
+    const leaderList = leaderBoard.map(item => <div key={item._id} className='leader-board-item'>
         <div className='record'>Winner: {item.winner}</div>
         <div className='record'>Date: {item.date}</div>
     </div>)
