@@ -73,12 +73,6 @@ function rootReducer (state = initialState, {type, payload}) {
 
 
 
-
-
-
-
-let state = null
-
 function createStore(reducer) {
     const subj$ = new BehaviorSubject(initialState)
     const store$ = subj$.pipe(
@@ -90,11 +84,3 @@ function createStore(reducer) {
 }
 
 export const store$ = createStore(rootReducer)
-
-store$.subscribe(store => state = store)
-
-
-
-
-
-export default state
