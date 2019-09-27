@@ -10,6 +10,7 @@
     margin-bottom: 5px;
     border-radius: 5px;
     color: #eeeeee;
+    cursor: pointer;
 }
 .record{
     text-align: center;

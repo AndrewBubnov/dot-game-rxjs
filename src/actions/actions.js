@@ -18,8 +18,9 @@ import { dateTime } from "../utils/utils";
 
 
 
-export const presetUrl = 'https://dot-game-api.herokuapp.com/api/presets'
-export const winnerUrl = 'https://dot-game-api.herokuapp.com/api/winner'
+const presetUrl = 'https://dot-game-api.herokuapp.com/api/presets'
+const winnerUrl = 'https://dot-game-api.herokuapp.com/api/winner'
+const deleteUrl = 'https://dot-game-api.herokuapp.com/api/delete'
 const presetError = `Can not get presets from server. The mock data will be used.`
 const leaderBoardError = `Can not get leader board from server. Please try to refresh the page.`
 const serverSaveError = `Sorry, something's gone wrong on server. Please try again!`
@@ -86,7 +87,7 @@ const setWinner = async () => {
         dispatch ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         dispatch ({type: SET_MODAL_OPEN, payload: true})
-        dispatch ({type: SET_ERROR_MESSAGE, payload: serverSaveError})
+        dispatch ({type: SET_ERROR_MESSAGE, payload: err.message || serverSaveError})
     } finally {
         dispatch ({type: SET_STARTED, payload: false})
     }
@@ -117,7 +118,7 @@ export const getLeaderBoard = async () => {
         dispatch ({type: SET_LEADER_BOARD, payload: response.data})
     } catch (err) {
         dispatch ({type: SET_MODAL_OPEN, payload: true})
-        dispatch ({type: SET_ERROR_MESSAGE, payload: leaderBoardError})
+        dispatch ({type: SET_ERROR_MESSAGE, payload: err.message || leaderBoardError})
     }
 }
 //**********************
@@ -156,3 +157,13 @@ export const handleChange = (e, name) => store$.dispatch({type: SET_VALUES, payl
 
 export const handleSliderChange = (name, value) => store$.dispatch({type: SET_SLIDER_VALUES, payload: {name, value}})
 //**********************
+
+export const deleteWinner = async (_id) => {
+    try {
+        const response = await axios.delete(`${deleteUrl}/${_id}`)
+        dispatch({type: SET_LEADER_BOARD, payload: response.data})
+    } catch (err) {
+        dispatch({type: SET_MODAL_OPEN, payload: true})
+        dispatch({type: SET_ERROR_MESSAGE, payload: err.message})
+    }
+}
