@@ -8,7 +8,10 @@ import {
     SET_WINNER,
     SET_NEXT_GAME,
     SET_LEADER_BOARD,
-    SET_MODAL_OPEN, SET_ERROR_MESSAGE, SET_PRESETS,
+    SET_MODAL_OPEN,
+    SET_ERROR_MESSAGE,
+    SET_PRESETS,
+    ADD_WINNER
 } from './types'
 
 
@@ -84,7 +87,7 @@ const setWinner = async () => {
     try {
         const response = await axios.post(winnerUrl, {winner, date: dateTime()})
         if (response.data.length > 10) response.data.splice(0, response.data.length - 10)
-        dispatch ({type: SET_LEADER_BOARD, payload: response.data})
+        dispatch ({type: ADD_WINNER, payload: response.data})
     } catch (err) {
         dispatch ({type: SET_MODAL_OPEN, payload: true})
         dispatch ({type: SET_ERROR_MESSAGE, payload: err.message || serverSaveError})
@@ -160,8 +163,10 @@ export const handleSliderChange = (name, value) => store$.dispatch({type: SET_SL
 
 export const deleteWinner = async (_id) => {
     try {
-        const response = await axios.delete(`${deleteUrl}/${_id}`)
-        dispatch({type: SET_LEADER_BOARD, payload: response.data})
+        const response = await axios.delete(`${deleteUrl}/${_id}`);
+        const leaderBoard = getState().leaderBoard;
+        const newLeaderBoard = leaderBoard.filter(item => item._id !== response.data._id)
+        dispatch({type: SET_LEADER_BOARD, payload: newLeaderBoard})
     } catch (err) {
         dispatch({type: SET_MODAL_OPEN, payload: true})
         dispatch({type: SET_ERROR_MESSAGE, payload: err.message})

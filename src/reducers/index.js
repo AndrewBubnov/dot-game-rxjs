@@ -13,7 +13,8 @@ import {
     SET_GAME_FIELD,
     SET_WINNER,
     SET_RANDOM_INDEX,
-    SET_SLIDER_VALUES
+    SET_SLIDER_VALUES,
+    ADD_WINNER
 } from '../actions/types'
 
 export const initialState = {
@@ -63,6 +64,8 @@ function rootReducer (state = initialState, {type, payload}) {
             return {...state, randomIndex: payload}
         case SET_VALUES:
             return {...state, values: {...state.values, [payload.name]: payload.value}}
+        case ADD_WINNER:
+            return {...state, leaderBoard: [...state.leaderBoard, payload]}
         case SET_SLIDER_VALUES:
             return {...state, values: {...state.values, preset: {...state.values.preset, [payload.name]: payload.value}}}
 
